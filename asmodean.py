@@ -26,7 +26,7 @@ def save_tools(description_pages):
 r = http.request('GET', 'http://asmodean.reverse.net/pages/tools_index.html')
 
 tool_page_urls = list(collect_tool_page_urls(r.data))
-#
-a = list(map_tool_url_tool_page([tool_page_urls[0], tool_page_urls[-1]]))
+# a = list(map_tool_url_tool_page([tool_page_urls[0], tool_page_urls[-1]]))
+a = list(map_tool_url_tool_page(tool_page_urls))
 save_descriptions(a)
 save_tools(a)
