@@ -1,13 +1,4 @@
-##@ Build
-dist/git-msg: main.go ## Build the git-msg binary.
-	@mkdir -p dist
-	@go build -o dist/git-msg ./main.go
-	@chmod +x dist/git-msg
 
-##@ Clean
-.PHONY: clean
-clean: ## Clean the build artifacts.
-	@rm -rf dist
 
 ##@ Help
 help: ## Display this help.

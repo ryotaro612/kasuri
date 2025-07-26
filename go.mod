@@ -1,3 +1,3 @@
-module github.com/ryotaro612/gitmsg
+module github.com/ryotaro612/kasuri
 
-go 1.24.2
+go 1.24.4

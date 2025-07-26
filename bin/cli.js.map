@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../src/index.ts", "../src/main.ts"],
-  "sourcesContent": ["#!/usr/bin/env -S node --enable-source-maps\n\nimport { argv } from \"node:process\";\nimport { main } from \"./main.ts\";\n\nmain(argv.slice(2)).then((exitCode) => {\n  if (exitCode !== 0) {\n    process.exit(exitCode);\n  }\n});\n", "\nexport async function main(args: string[]): Promise<number> {\n\n  return 0;\n}\n"],
-  "mappings": ";AAEA,OAAS,QAAAA,MAAY,eCDrB,eAAsBC,EAAKC,EAAiC,CAE1D,MAAO,EACT,CDCAC,EAAKC,EAAK,MAAM,CAAC,CAAC,EAAE,KAAMC,GAAa,CACjCA,IAAa,GACf,QAAQ,KAAKA,CAAQ,CAEzB,CAAC",
-  "names": ["argv", "main", "args", "main", "argv", "exitCode"]
-}
