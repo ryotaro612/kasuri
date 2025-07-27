@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ryotaro612/kasuri/internal"
+	"github.com/ryotaro612/ashitaba/internal"
 )
 
 func main() {
