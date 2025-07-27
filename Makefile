@@ -1,4 +1,6 @@
-
+##@ Test
+test: ## Run tests.
+	go test ./...
 
 ##@ Help
 help: ## Display this help.
