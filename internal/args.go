@@ -1,30 +1,40 @@
 package internal
 
 import (
+	"errors"
 	"flag"
+	"os"
 )
 
-var verbose = flag.Bool("verbose", false, "Be verbose")
-
-func Read(args []string) (Command, error) {
+// Read reads command line arguments and environment variables to constrcut Args.
+func Read(args []string) (Args, error) {
 	fs := flag.NewFlagSet("", flag.ExitOnError)
 
 	verbose := fs.Bool("verbose", false, "Be verbose")
+	token := fs.String("token", "", "Slack bot token")
 
 	fs.Parse(args)
 
-	return Command{
-		verbose: *verbose,
-	}, nil
+	tkn, ok := os.LookupEnv("ASHITABA_SLACK_TOKEN")
 
-	// found, ok := os.LookupEnv("KASURI_SLACK_TOKEN")
-	// if !ok {
-	// 	return Command{}, errors.New("KASURI_SLACK_TOKEN not found")
-	// }
-	// return Command{token: found}, nil
+	res := Args{
+		verbose: *verbose,
+	}
+	if ok {
+		res.token = tkn
+	} else {
+		res.token = *token
+	}
+
+	if res.token == "" {
+		return res, errors.New("Slack token is required, set it via -token flag or ASHITABA_SLACK_TOKEN environment variable")
+	}
+
+	return res, nil
+
 }
 
-type Command struct {
+type Args struct {
 	token   string // Slack Token
 	verbose bool   // Be verbose
 }

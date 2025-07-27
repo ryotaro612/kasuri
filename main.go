@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/ryotaro612/ashitaba/internal"
 )
 
 func main() {
-	cmd, err := internal.Read()
+	_, err := internal.Read(os.Args[1:])
 	if err != nil {
 
 	}

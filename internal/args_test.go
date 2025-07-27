@@ -5,24 +5,48 @@ import (
 )
 
 func TestVerboseIsBoolOption(t *testing.T) {
-
-	args := []string{"-verbose"}
-	cmd, err := Read(args)
+	t.Parallel()
+	args := []string{"-verbose", "-token", "a"}
+	actual, err := Read(args)
 	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
-	if !cmd.verbose {
-		t.Error("verbose should be true when -verbose is passed")
+
+	expected := Args{
+		verbose: true,
+		token:   "a",
 	}
+
+	if expected != actual {
+		t.Errorf("The expected value is %#v, but got %#v", expected, actual)
+	}
+
 }
 
 func TestVerboseIsOptional(t *testing.T) {
-	args := []string{}
-	cmd, err := Read(args)
+	t.Parallel()
+	actual, err := Read([]string{"-token", "a"})
 	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
-	if cmd.verbose {
-		t.Error("verbose should be false when -verbose is not passed")
+
+	expected := Args{
+		verbose: false,
+		token:   "a",
+	}
+	if expected != actual {
+		t.Errorf("The expected value is %#v, but got %#v", expected, actual)
+	}
+
+}
+
+func TestSlackTokenCanBePassedAsEnvVar(t *testing.T) {
+	t.Setenv("ASHITABA_SLACK_TOKEN", "test_token")
+	cmd, err := Read([]string{})
+	if err != nil {
+		t.Errorf("Expected no error, got %v", err)
+	}
+	if cmd.token != "test_token" {
+		t.Error("cmd.token should be set to the value of ASHITABA_SLACK_TOKEN")
 	}
 }
